@@ -138,6 +138,7 @@ typedef struct zathura_rectangle_s
   double y1; /**< Y coordinate of point 1 */
   double x2; /**< X coordinate of point 2 */
   double y2; /**< Y coordinate of point 2 */
+  int z;
 } zathura_rectangle_t;
 
 /**

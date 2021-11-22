@@ -139,13 +139,15 @@ rotate_rectangle(zathura_rectangle_t rectangle, unsigned int degree, double heig
 zathura_rectangle_t
 recalc_rectangle(zathura_page_t* page, zathura_rectangle_t rectangle)
 {
-  if (page == NULL) {
+  if (page == NULL)
+  {
     goto error_ret;
   }
 
   zathura_document_t* document = zathura_page_get_document(page);
 
-  if (document == NULL) {
+  if (document == NULL)
+  {
     goto error_ret;
   }
 
@@ -153,7 +155,8 @@ recalc_rectangle(zathura_page_t* page, zathura_rectangle_t rectangle)
   double page_width  = zathura_page_get_width(page);
   double scale       = zathura_document_get_scale(document);
 
-  zathura_rectangle_t tmp = rotate_rectangle(rectangle, zathura_document_get_rotation(document), page_height, page_width);
+  zathura_rectangle_t tmp 
+    = rotate_rectangle(rectangle, zathura_document_get_rotation(document), page_height, page_width);
   tmp.x1 *= scale;
   tmp.x2 *= scale;
   tmp.y1 *= scale;
@@ -181,13 +184,18 @@ zathura_page_get_widget(zathura_t* zathura, zathura_page_t* page)
 void
 document_draw_search_results(zathura_t* zathura, bool value)
 {
-  if (zathura == NULL || zathura->document == NULL || zathura->pages == NULL) {
+  if (zathura == NULL || zathura->document == NULL || zathura->pages == NULL)
+  {
     return;
   }
 
   unsigned int number_of_pages = zathura_document_get_number_of_pages(zathura->document);
   for (unsigned int page_id = 0; page_id < number_of_pages; page_id++) {
-    g_object_set(zathura->pages[page_id], "draw-search-results", (value == true) ? TRUE : FALSE, NULL);
+    g_object_set
+      (zathura->pages[page_id]
+      ,"draw-search-results"
+      ,(value == true) ? TRUE : FALSE
+      ,NULL);
   }
 }
 

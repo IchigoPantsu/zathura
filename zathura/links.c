@@ -37,7 +37,8 @@ zathura_link_new(zathura_link_type_t type, zathura_rectangle_t position,
   switch (type) {
     case ZATHURA_LINK_NONE:
     case ZATHURA_LINK_GOTO_DEST:
-      if (target.value != NULL) {
+      if (target.value != NULL) 
+      {
         link->target.value = g_strdup(target.value);
       }
       break;

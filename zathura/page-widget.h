@@ -104,4 +104,42 @@ void zathura_page_widget_abort_render_request(ZathuraPage* widget);
  */
 zathura_page_t* zathura_page_widget_get_page(ZathuraPage* widget);
 
+typedef struct zathura_page_widget_private_s {
+  zathura_page_t* page; /**< Page object */
+  zathura_t* zathura; /**< Zathura object */
+  cairo_surface_t* surface; /**< Cairo surface */
+  cairo_surface_t* thumbnail; /**< Cairo surface */
+  ZathuraRenderRequest* render_request; /* Request object */
+  bool cached; /**< Cached state */
+
+  struct {
+    girara_list_t* list; /**< List of links on the page */
+    gboolean retrieved; /**< True if we already tried to retrieve the list of links */
+    gboolean draw; /**< True if links should be drawn */
+    unsigned int offset; /**< Offset to the links */
+    unsigned int n; /**< Number */
+  } links;
+
+  struct {
+    girara_list_t* list; /**< A list if there are search results that should be drawn */
+    int current; /**< The index of the current search result */
+    gboolean draw; /**< Draw search results */
+  } search;
+
+  struct {
+    girara_list_t* list; /**< List of images on the page */
+    gboolean retrieved; /**< True if we already tried to retrieve the list of images */
+    zathura_image_t* current; /**< Image data of selected image */
+  } images;
+
+  struct {
+    zathura_rectangle_t selection; /**< Region selected with the mouse */
+    struct {
+      int x; /**< X coordinate */
+      int y; /**< Y coordinate */
+    } selection_basepoint;
+    gboolean over_link;
+  } mouse;
+} ZathuraPagePrivate;
+
 #endif
